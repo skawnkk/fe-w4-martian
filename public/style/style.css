@@ -1,0 +1,18 @@
+.hexa_result{
+   display: flex;
+   padding: 20px;
+   height: 40px;
+   background-color: black;
+   color: rgb(34, 248, 6);
+}
+
+.hexa_result div{
+   margin: 5px 10px;
+}
+
+.translate_btn{
+   padding: 10px;
+   font-size: 20px;
+   font-weight: 700;
+   margin-top: 20px;
+}
