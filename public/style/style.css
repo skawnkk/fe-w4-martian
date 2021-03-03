@@ -1,6 +1,20 @@
-.message_section{
+section{
    display: flex;
    justify-content: space-around;
+}
+
+.clearfix::after {
+   content: "";
+   clear: both;
+   display: block;
+}
+
+/* 메시지관리 */
+.message_section{
+   margin-top: 200px;
+}
+.get_message{
+   margin-bottom: 50px;
 }
 .received_msg_area{
    display: flex;
@@ -30,6 +44,9 @@
    margin-right : 20px;
 }
 
+.paste_area{
+   display: flex;
+}
 .btn{
    height: 30px;
    font-weight: 700;
@@ -53,10 +70,54 @@
    color: rgb(34, 248, 6);
    text-transform: uppercase;
    font-size: 18px;
+}
 
+.msg_input:focus{
+   outline: none;
 }
 
 .msg_input::placeholder{
    font-size: 18px;
    padding: 5px;
+}
+
+/* 원판 */
+.line_wrap{
+   height: 580px;
+}
+
+.line_wrap div{
+   width: 400px;
+   height: 0;
+   position: absolute;
+   top: 250px;
+   left: 100px;
+   display: flex;
+}
+
+.line_wrap div div:last-child{
+   float: right;
+   border-top: 1px solid blue;
+}
+
+#rotate_none{
+   border: 1px solid lightgrey;
+   border-radius: 100%;
+   width: 50px;
+   height: 50px;
+   line-height: 50px;
+   text-align: center;
+   background-color:lightgrey;
+   font-size: 2em;
+   position: relative;
+   top: -29px;
+   left: -52px;
+}
+
+#arrow{
+   font-size: 100px;
+   font-weight: 700;
+   position: relative;
+   top: 335px;
+   left: 115px;
 }

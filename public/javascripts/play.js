@@ -1,11 +1,14 @@
-import {aschiMessageToHexa, hexaCheck} from "./asci.js";
+import {aschiMessageToHexa, hexaCheck, transChartoHexa} from "./asci.js";
+import { makeCommunicator } from "./communicator.js";
 import { _ } from "./util.js";
 
 let receivedMsgArr = aschiMessageToHexa();
 const receivedMsgArea = _.$('.hexa_result');
 const translateArea = _.$('.translate_area');
 const translateBtn = _.$('.translate_btn');
+const sendBtn = _.$('.send_btn');
 const msgInputArea = _.$('.msg_input');
+const translageSendMsgArea = _.$('.send_message .paste_area');
 console.log("start!")
 
 // 메세지 수신 & 출력 받기
@@ -37,36 +40,46 @@ function translateMsg(){
    },'')
 }
 
+function changeClass(target){
+   target.classList.toggle("btn_on")
+   target.classList.toggle("btn_off")
+}
+
 function controllTranslateBtn(){
    if (receivedMsgArea.lastElementChild.innerText === "- 끝 -"){
       translateBtn.disabled = false;
-      translateBtn.classList.add("btn_on")
-      translateBtn.classList.remove("btn_off")
+      changeClass(translateBtn);
    };
-   translateBtn.addEventListener("click", pasteReceivedMsg(translateMsg(), translateArea))
+   translateBtn.addEventListener("click", ()=> pasteReceivedMsg(translateMsg(), translateArea))
 }
 
-msgInputArea.addEventListener("keydown", (e)=>console.log(e.key.toUpperCase()))
+function controllSendBtn(){
+   let observer = new MutationObserver(()=>changeClass(sendBtn));
+   var config = {childList: true};
+   observer.observe(translageSendMsgArea, config);
+}
+
+function printMsgToSend(){    
+   msgInputArea.addEventListener("keydown", (e)=>{
+      const strRange = /[\s\S]/g;
+      let msgToSend = e.key.toUpperCase();
+      if (msgToSend.match(strRange) && msgToSend.length===1) {
+         let translatedMsg = aschiMessageToHexa(msgToSend)[0][1];
+         pasteReceivedMsg(translatedMsg, translageSendMsgArea);
+      } else if (msgToSend==="BACKSPACE"){
+         if(translageSendMsgArea.lastElementChild) translageSendMsgArea.removeChild(translageSendMsgArea.lastElementChild)
+         if(!translageSendMsgArea.previousSibling) changeClass(sendBtn);
+      }
+   })
+}
+
+
 
 function init(){
    receiveMsg();
- 
+   printMsgToSend();
+   controllSendBtn();
+   makeCommunicator();
 }
 
 init();
-
-
-
-
-// function delay(msg, ms) {
-//    return new Promise((resolve)=>{
-//       setTimeout(()=>resolve(msg), ms);
-//    })
-// }
-
-
-// delay(receivedMsgArr, 3000).then((result)=>pasteReceivedMsg(result[1]));
-
-
-
-
