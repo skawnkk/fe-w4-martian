@@ -11,10 +11,33 @@ module.exports = {
      <body>
      <h1>🪐The Martian Talk!__with the Earth🌏</h1>
        ${canvas}
-       <div class="hexa_result">
-        <div>지구 => 화성: </div>
-       </div>
-       <button class="translate_btn" disabled="disabled"> 번역 GO </button>
+       <section class="message_section">
+        <div class="get_message">
+          <div class="received_msg_area showing_msg_area">
+            <div class="hexa_result">
+              <div>[ EARTH => MARSE ] : </div>
+            </div>
+            <button class="translate_btn btn btn_off" disabled="disabled"> READING </button>
+          </div>
+          <div class="received_msg_area translate_area">
+            <div> [ TRANSLATE ] : </div>
+          </div>
+        </div>
+
+        <div class="send_message">
+          <div class="received_msg_area translate_area">
+            <div>[ EARTH => MARSE ] :  </div>
+            <input class="msg_input" type="text" placeholder="INPUT MESSAGE TO SEND"></input>
+          </div>
+          <div class="received_msg_area showing_msg_area">
+            <div class="hexa_result">
+              <div>[ TRANSLATE ] : </div>
+            </div>
+            <button class="translate_btn btn btn_off" disabled="disabled"> SEND </button>
+          </div>
+        </div>
+      </section>
+      
        <script type="module" src="/javascripts/play.js"></script>
      </body>
      </html>
