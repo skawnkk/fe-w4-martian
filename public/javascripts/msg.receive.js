@@ -27,9 +27,10 @@ function controllTranslateBtn(){
    translateBtn.addEventListener("click", ()=> pasteMsg(translateMsg(), translateArea))
 }
 
-function comparsionValue(currIdx){
-   let prevIdx = storageIdx.pop();
-   let moveVal = (Math.abs(prevIdx-currIdx)>charList.length-Math.abs(prevIdx-currIdx))?Math.abs(prevIdx-currIdx):charList.length-Math.abs(prevIdx-currIdx);
+function comparsionValue(prevIdx, currIdx){
+   
+   let moveVal = (Math.abs(prevIdx-currIdx)>charList.length-Math.abs(prevIdx-currIdx))?charList.length-Math.abs(prevIdx-currIdx):Math.abs(prevIdx-currIdx)
+   console.log(moveVal)
    if (moveVal===Math.abs(prevIdx-currIdx)){
       if(prevIdx-currIdx>0) moveDirection = -1;
       else moveDirection = 1;
@@ -48,14 +49,16 @@ function pointTargetChar(char){
    if (storageIdx.length===0) {
       if(currIdx<=8){
       degree = 360/charList.length*[currIdx+1];
-      console.log(char,currIdx,degree)
+      // console.log(char,currIdx,degree)
       } else {
       degree = -360/charList.length*[charList.length-currIdx-1]
       }
    }
    else {
-      [moveVal, moveDirection] = comparsionValue(currIdx)
-      degree = 360/charList.length*moveVal*moveDirection;      
+      let prevIdx = storageIdx.pop();
+      [moveVal, moveDirection] = comparsionValue(prevIdx, currIdx)
+      degree = 360/charList.length*[prevIdx+1] + 360/charList.length*moveVal*moveDirection; //화살표 표시해준 다음 다시 애니없이 리셋하기, 그리고 이전 값 지우기
+      console.log(moveVal, moveDirection, degree)     
    }
    
    const arrow = _.$('#arrow');
@@ -66,16 +69,24 @@ function pointTargetChar(char){
 
 const msgArrToStr = () =>receivedMsgArr.map(el=>el[1]).join().replaceAll(",","").split("");
 
+
+function promise(val, ms){
+   return new Promise(resolve=>setTimeout(() =>resolve(val), ms))
+}
+
 export function receiveMsg(){
    
    msgArrToStr().forEach((el, idx) => {
-      return new Promise(resolve=> setTimeout(()=>resolve(el), 4000*(idx+1)))
-      .then((char)=> setTimeout(()=>pointTargetChar(char), 2000))
+      return promise(el, 4000*(idx+1))
+      .then((el)=>promise(pointTargetChar(el), 2000))
       .then((result)=>pasteMsg(result, receivedMsgArea))
       .then(()=>{
          if(idx===msgArrToStr().length-1) {
-            pasteMsg("- 끝 -",receivedMsgArea);
-            controllTranslateBtn();
+            setTimeout(()=>{
+               pasteMsg("- 끝 -",receivedMsgArea)
+               controllTranslateBtn();
+            },2000);
+            
          }
       })
 })}

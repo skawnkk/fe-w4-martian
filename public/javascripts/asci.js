@@ -6,7 +6,7 @@ export function hexaCheck(num){
    return num;
 }
 
-export function aschiMessageToHexa(str = 'HOW'){
+export function aschiMessageToHexa(str = 'O'){
    // const str = 'HOW ALIVE?';
    let result = [];
    for(let i=0; i<str.length;i++){
