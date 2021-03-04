@@ -1,6 +1,6 @@
 section{
-   display: flex;
-   justify-content: space-around;
+   display: grid;
+   grid-template-columns: 800px 800px;
 }
 
 .clearfix::after {
@@ -13,6 +13,7 @@ section{
 .message_section{
    margin-top: 200px;
 }
+
 .get_message{
    margin-bottom: 50px;
 }
@@ -51,6 +52,10 @@ section{
    height: 30px;
    font-weight: 700;
    background-color: rgb(0,0,0);
+}
+
+.btn:hover{
+   outline: none;
 }
 
 .btn_off{
@@ -115,9 +120,16 @@ section{
 }
 
 #arrow{
-   font-size: 100px;
+   width: 100px;
+   height:10px;
+   background-color: hotpink;
+   border: 1px solid pink;
+   font-size: 10px;
    font-weight: 700;
    position: relative;
-   top: 335px;
-   left: 115px;
+   top: 408px;
+   left: 290px;
+   transform-origin: right;
+   transition: all 2s;
+   text-indent: -9999px;
 }
