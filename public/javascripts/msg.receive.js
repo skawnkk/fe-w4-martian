@@ -28,37 +28,31 @@ function controllTranslateBtn(){
 }
 
 function comparsionValue(prevIdx, currIdx){
+   let absCurrPrevDiff = Math.abs(prevIdx-currIdx);
+   let moveVal = (absCurrPrevDiff>charList.length-absCurrPrevDiff)?charList.length-absCurrPrevDiff:absCurrPrevDiff
    
-   let moveVal = (Math.abs(prevIdx-currIdx)>charList.length-Math.abs(prevIdx-currIdx))?charList.length-Math.abs(prevIdx-currIdx):Math.abs(prevIdx-currIdx)
-   console.log(moveVal)
-   if (moveVal===Math.abs(prevIdx-currIdx)){
-      if(prevIdx-currIdx>0) moveDirection = -1;
-      else moveDirection = 1;
+   if (moveVal===absCurrPrevDiff){
+      moveDirection = (prevIdx-currIdx>0)?-1:1;
    }else{
-      (charList.length-Math.abs(prevIdx-currIdx)<0)? moveDirection = -1:moveDirection = 1;
+      (charList.length-absCurrPrevDiff<0)? moveDirection = 1:moveDirection = -1;
    }
    return [moveVal, moveDirection]
 }
 
 function pointTargetChar(char){
-   console.log(char)
 
    let moveVal;
    let moveDirection;
    let currIdx = charList.indexOf(char);
+   const anAngle = 360/charList.length;
+
    if (storageIdx.length===0) {
-      if(currIdx<=8){
-      degree = 360/charList.length*[currIdx+1];
-      // console.log(char,currIdx,degree)
-      } else {
-      degree = -360/charList.length*[charList.length-currIdx-1]
-      }
-   }
-   else {
+      degree = (currIdx<=8)? anAngle*[currIdx+1]:-anAngle*[charList.length-1-currIdx]
+   } else {
       let prevIdx = storageIdx.pop();
+      if(prevIdx===15) prevIdx=-1;
       [moveVal, moveDirection] = comparsionValue(prevIdx, currIdx)
-      degree = 360/charList.length*[prevIdx+1] + 360/charList.length*moveVal*moveDirection; //화살표 표시해준 다음 다시 애니없이 리셋하기, 그리고 이전 값 지우기
-      console.log(moveVal, moveDirection, degree)     
+      degree = anAngle*[prevIdx+1] + anAngle*moveVal*moveDirection; 
    }
    
    const arrow = _.$('#arrow');
@@ -68,14 +62,9 @@ function pointTargetChar(char){
 }
 
 const msgArrToStr = () =>receivedMsgArr.map(el=>el[1]).join().replaceAll(",","").split("");
-
-
-function promise(val, ms){
-   return new Promise(resolve=>setTimeout(() =>resolve(val), ms))
-}
+const promise = (val, ms) => new Promise(resolve=>setTimeout(() =>resolve(val), ms));
 
 export function receiveMsg(){
-   
    msgArrToStr().forEach((el, idx) => {
       return promise(el, 4000*(idx+1))
       .then((el)=>promise(pointTargetChar(el), 2000))
@@ -86,7 +75,7 @@ export function receiveMsg(){
                pasteMsg("- 끝 -",receivedMsgArea)
                controllTranslateBtn();
             },2000);
-            
          }
       })
-})}
+   })
+}

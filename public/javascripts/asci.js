@@ -6,9 +6,10 @@ export function hexaCheck(num){
    return num;
 }
 
-export function aschiMessageToHexa(str = 'O'){
+export function aschiMessageToHexa(str = 'HOW ALIVE'){
    // const str = 'HOW ALIVE?';
    let result = [];
+   str=str.toUpperCase();
    for(let i=0; i<str.length;i++){
       let str_10 = str.charCodeAt(i);
       let str_10_16 = `${String(hexaCheck(parseInt(str_10/16)))+String(hexaCheck(str_10%16))}` 
