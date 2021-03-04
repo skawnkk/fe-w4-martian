@@ -4,8 +4,7 @@ import { receiveMsg } from "./msg.receive.js";
 import {  printMsgToSend, controllSendBtn} from "./msg.send.js";
 
 export function pasteMsg(char, pasteArea){
-   console.log(char)
-   const tempDiv = document.createElement("div");
+   const tempDiv = _.create("div");
    tempDiv.innerText = char;
    pasteArea.insertAdjacentElement('beforeEnd', tempDiv)
 }
