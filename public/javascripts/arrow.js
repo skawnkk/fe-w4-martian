@@ -1,9 +1,6 @@
-import {
-   charList
-} from "./communicator.js";
-import {
-   _
-} from "./util.js";
+import { charList } from "./communicator.js";
+import { _ } from "./util.js";
+
 let storageIdx = [];
 let degree;
 let moveVal;
@@ -23,6 +20,7 @@ export function pointTargetChar(char) {
 
    if (storageIdx.length === 0) {
       degree = (currIdx <= 8) ? anAngle * [currIdx + 1] : -anAngle * [charList.length - 1 - currIdx];
+
    } else {
       let prevIdx = storageIdx.pop();
       if (prevIdx === charList.length - 1) prevIdx = -1;

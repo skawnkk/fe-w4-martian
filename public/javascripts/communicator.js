@@ -12,12 +12,16 @@ export function makeCommunicator(){
          <div class="inner_num"><div class="clearfix" id="rotate_none">&nbsp;${charList[i]}</div></div>
          <div class="inner_num"><div class="clearfix" id="rotate_none">&nbsp;${charList[i+8]}</div></div>
       `
-      tempDiv.innerHTML = circleDivs;
-      tempDiv.firstElementChild.style.transform = `rotate(${360/charList.length*[i+1]}deg)`;
-      tempDiv.lastElementChild.style.transform = `rotate(${360/charList.length*[i+9]}deg)`;
       
-      tempDiv.firstElementChild.firstChild.style.transform = `rotate(-${360/charList.length*[i+1]}deg)`
-      tempDiv.lastElementChild.firstChild.style.transform = `rotate(-${360/charList.length*[i+9]}deg)`;
+      tempDiv.innerHTML = circleDivs;
+      const divFirstChild = tempDiv.firstElementChild;
+      const divLastChild = tempDiv.lastElementChild;
+      
+      divFirstChild.style.transform = `rotate(${360/charList.length*[i+1]}deg)`;
+      divLastChild.style.transform = `rotate(${360/charList.length*[i+9]}deg)`;
+      
+      divFirstChild.firstChild.style.transform = `rotate(-${360/charList.length*[i+1]}deg)`
+      divLastChild.firstChild.style.transform = `rotate(-${360/charList.length*[i+9]}deg)`;
       
       circleArea.appendChild(tempDiv);
    }
