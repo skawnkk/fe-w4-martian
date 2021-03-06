@@ -6,7 +6,7 @@ export function hexaCheck(num){
    return num;
 }
 
-export function aschiMessageToHexa(str = 'HO'){
+export function aschiMessageToHexa(str = 'O'){
    // const str = 'HOW ALIVE?';
    let result = [];
    str=str.toUpperCase();

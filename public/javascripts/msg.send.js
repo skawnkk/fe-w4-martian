@@ -22,15 +22,15 @@ function playCommunicator() {
    strMsg.forEach((el, idx) => {
       promise(el, 2000 * (idx + 1))
       .then((el)=> promise(pointTargetChar(el), 1000))
-      .then((el) => pasteMsg(el, translateSendMsgArea))
+      .then((el) => pasteMsg(el, translateSendMsgArea, idx))
    })
 }
 
-        
 sendBtn.addEventListener('click', () => {
    while(translateSendMsgArea.hasChildNodes()){
    translateSendMsgArea.removeChild(translateSendMsgArea.firstChild)}
-   playCommunicator()});
+   playCommunicator()
+});
 
 
 export function controllInputBox() {
@@ -59,7 +59,11 @@ export function printMsgToSend() {
          let translatedMsg = aschiMessageToHexa(msgToSend)[0][1];
          pasteMsg(translatedMsg, translateSendMsgArea);
       } else if (msgToSend === "BACKSPACE") {
-         if (translateSendMsgArea.lastElementChild) translateSendMsgArea.removeChild(translateSendMsgArea.lastElementChild);
+         let translatedArr = translateSendMsgArea.innerHTML.trim().split("");
+         translatedArr.splice(translatedArr.length-2, 2)
+         let translatedStr = translatedArr.join('')
+         translateSendMsgArea.innerHTML='';
+         translateSendMsgArea.innerHTML=translatedStr;
       }
    })
 }
