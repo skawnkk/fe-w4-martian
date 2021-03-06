@@ -1,8 +1,6 @@
 export function hexaCheck(num){
    const range = ['A','B','C','D','E','F'];
-   if (num>=10){
-      num = range[num-10];
-   }
+   if (num>=10) num = range[num-10];
    return num;
 }
 
@@ -17,4 +15,3 @@ export function aschiMessageToHexa(str = 'O'){
    }
    return result;
 }
-
