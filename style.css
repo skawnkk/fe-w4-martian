@@ -1,0 +1,142 @@
+section {
+  display: grid;
+  grid-template-columns: 800px 800px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+h1 {
+  margin-top: 50px;
+  margin-left: 100px;
+  width: 800px;
+}
+
+/* 메시지관리 */
+.message_section {
+  margin-top: 200px;
+}
+
+.get_message {
+  margin-bottom: 50px;
+}
+.msg_area {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  height: 40px;
+  width: 800px;
+  margin-top: 10px;
+  background-color: black;
+  color: rgb(34, 248, 6);
+}
+
+.showing_msg_area {
+  justify-content: space-between;
+}
+
+.hexa_result {
+  display: flex;
+  color: rgb(34, 248, 6);
+}
+
+.hexa_result div {
+  margin-right: 20px;
+}
+
+.translate_area div {
+  margin-right: 20px;
+}
+
+.paste_area {
+  display: flex;
+}
+
+.btn {
+  height: 30px;
+  font-weight: 700;
+  background-color: rgb(0, 0, 0);
+}
+
+.btn:hover {
+  outline: none;
+}
+
+.btn.off {
+  color: rgb(138, 148, 137);
+  border: 1px solid rgb(138, 148, 137);
+}
+
+.btn.on {
+  color: rgb(34, 248, 6);
+  border: 1px solid rgb(34, 248, 6);
+}
+
+.msg_input {
+  width: 70%;
+  border: none;
+  background-color: rgb(0, 0, 0);
+  color: rgb(34, 248, 6);
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.msg_input:focus {
+  outline: none;
+}
+
+.msg_input::placeholder {
+  font-size: 18px;
+  padding: 5px;
+}
+
+/* 원판 */
+.line_wrap {
+  height: 580px;
+}
+
+.line_wrap div {
+  width: 400px;
+  height: 0;
+  position: absolute;
+  top: 250px;
+  left: 100px;
+  display: flex;
+}
+
+.line_wrap div div:last-child {
+  float: right;
+  border-top: 1px solid blue;
+}
+
+#rotate_none {
+  border: 1px solid lightgrey;
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background-color: lightgrey;
+  font-size: 2em;
+  position: relative;
+  top: -29px;
+  left: -52px;
+}
+
+#arrow {
+  width: 100px;
+  height: 10px;
+  background-color: hotpink;
+  border: 1px solid pink;
+  font-size: 10px;
+  font-weight: 700;
+  position: relative;
+  top: 380px;
+  left: 290px;
+  transform-origin: right;
+  transition: all 1s;
+  text-indent: -9999px;
+}
